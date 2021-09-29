@@ -1,0 +1,85 @@
+Variables & Control Structures
+	0 is false, everything else is true
+	Delclaring a variable means requesting bits of memory from the system
+	Initialize variables outside of a for loop
+		if (x = 0) x is assigned 0, assignment operator returns 0, the if statement will 			always fail
+	Declare functions before they are used Ex: double dylan(int jack);
+		Or you write it on top
+
+Compiling
+	Preprocessor
+		Text replacement program
+		Preprocessor commands start with a #
+			No ";" at the end
+			#include - adds entire text of included file
+			#define <arg1> <arg2> - replaces every instance of arg1 with arg2
+				You can also define function-like stuff:
+				#define MAX(a, b) a > b ? a : b
+			#ifndef <IDENTIFIER> ... #endif - If identifier is not defined for 				preprocessor, read up to #endif, else don't.
+				Example:
+				#ifndef PI
+				#define PI 3.14
+				#endif
+	Compiler
+		Code -> binary code
+		Doesn't create an executable
+		Only one C file at a time
+		gcc -c runs preprocessor and compiler
+		gcc -E runs through preprocessor
+	Linker
+		Combines binary files into an executable
+		Automatically searches for standard library source code
+		If multiple definitions for identifies are found, the linker will fail
+		Exactly one definition for main
+		Gcc compiles each file then links then together
+			Giving gcc .o files will skip the compilation step
+	Make
+		Compiling tool
+		make will look for a file makefile
+			Targets: Things to make (executables)
+			Dependencies: Files/other targets needed to make a target
+			Rules: How to create the target
+		Make will always run the first target
+		Make recursively checks dependencies (depth-first)
+		Checks modify timestamps and only runs rules if target is older than dependencies
+		Syntax:
+			target: dependency0 dependency1 ...
+			TAB rule
+			
+Memory
+	Binary: 0s and 1s
+	A 0 or 1 is a bit, 8 bits = 1 byte
+	Volatile, requires power to store data
+	Opening a file: Computer copies file from storage into memory
+		Saving does the reverse
+		Running programs use memory (declaring variables)
+		
+	Endianness
+		Significance of bytes
+		261 as an int would be stored as 00000000 00000000 00000001 00000101
+			Big endian - most signifcant byte is at the start
+				Print as a short would not include the last two bytes
+			Little endian is the opposite (00000101 00000001 00000000 00000000)
+				Print would include the full value
+			
+Memory Addresses
+	Identifier - variable name
+	Value - variable data
+	Address - location of data in memory
+		Addressed from first byte up
+		Potential memory addresses is a processor limitation
+			A 32-bit processor can only process no more than 32 bits at once
+		OS defines address space
+		You can get the address of any variable using the address of operator: &
+		%p prints out memory address in hexadecimal format
+			You can also see it as an unsigned long
+		%u(nsigned), %d(ecimal), %o(ctal), (he)%x(adecimal)
+			h will print 2 bytes
+			hh will print 1 byte
+	Pointers
+		Regular variables store values
+		Pointers are variables that store memory addresses
+			Unsigned
+			8 bytes long on 64-bit systems
+			Declaration:
+				int *p = &x;
