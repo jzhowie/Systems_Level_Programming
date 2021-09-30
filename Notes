@@ -2,7 +2,7 @@ Variables & Control Structures
 	0 is false, everything else is true
 	Delclaring a variable means requesting bits of memory from the system
 	Initialize variables outside of a for loop
-		if (x = 0) x is assigned 0, assignment operator returns 0, the if statement will 			always fail
+		if (x = 0) x is assigned 0, assignment operator returns 0, the if statement will always fail
 	Declare functions before they are used Ex: double dylan(int jack);
 		Or you write it on top
 
@@ -15,7 +15,7 @@ Compiling
 			#define <arg1> <arg2> - replaces every instance of arg1 with arg2
 				You can also define function-like stuff:
 				#define MAX(a, b) a > b ? a : b
-			#ifndef <IDENTIFIER> ... #endif - If identifier is not defined for 				preprocessor, read up to #endif, else don't.
+			#ifndef <IDENTIFIER> ... #endif - If identifier is not defined for preprocessor, read up to #endif, else don't.
 				Example:
 				#ifndef PI
 				#define PI 3.14
@@ -45,23 +45,25 @@ Compiling
 		Syntax:
 			target: dependency0 dependency1 ...
 			TAB rule
-			
+
+			Other make targets: run, clean, <target file>
+			./make <run, clean, file>
+
 Memory
-	Binary: 0s and 1s
-	A 0 or 1 is a bit, 8 bits = 1 byte
+	Binary: A 0 or 1 is a bit, 8 bits = 1 byte
 	Volatile, requires power to store data
 	Opening a file: Computer copies file from storage into memory
 		Saving does the reverse
 		Running programs use memory (declaring variables)
-		
+
 	Endianness
 		Significance of bytes
 		261 as an int would be stored as 00000000 00000000 00000001 00000101
-			Big endian - most signifcant byte is at the start
+			Big endian - most significant byte is at the start
 				Print as a short would not include the last two bytes
 			Little endian is the opposite (00000101 00000001 00000000 00000000)
 				Print would include the full value
-			
+
 Memory Addresses
 	Identifier - variable name
 	Value - variable data
@@ -76,10 +78,41 @@ Memory Addresses
 		%u(nsigned), %d(ecimal), %o(ctal), (he)%x(adecimal)
 			h will print 2 bytes
 			hh will print 1 byte
+
 	Pointers
-		Regular variables store values
 		Pointers are variables that store memory addresses
 			Unsigned
 			8 bytes long on 64-bit systems
 			Declaration:
 				int *p = &x;
+			In Java NullPointerExceptions come from when object pointers point to memory address 0
+		Pointer Arithmetic
+			Can add or subtract
+			Scales by the size of type (char increments by 1, int increments by 4)
+			*cp++ != (*cp)++
+			Pointers can store memory addresses out of the physical limit, but won't be able to dereference (Seg Fault)
+		Arrays
+			Block of memory that holds multiple pieces of the same data type
+			C arrays have no length attribute
+			Size of an array is set at declaration (cannot be dynamic, equal to a variable or function)
+			No boundary checking
+			Declaration:
+				float ray[5];
+				ray[2] = 8.22;
+
+				Requests enough memory for 5 floats
+
+			Array Variables
+				Pointers to the allocated array block
+				Immutable
+				Ray will point to the beginning of the array
+				sizeof(variable) can give the size of a variable
+				You can keep track of array size like this:
+					int ARR_SIZE = 10;
+					float arr[ARR_SIZE];
+				Normal pointers can also be assigned to array pointers (it will do normal pointer things)
+
+				If you did float *rp = ray;
+				sizeof(rp) would return 20, sizeof(ray) would return 8
+
+				ray[3] and *(rp + 3) do the same thing
