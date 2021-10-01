@@ -115,4 +115,7 @@ Memory Addresses
 				If you did float *rp = ray;
 				sizeof(rp) would return 20, sizeof(ray) would return 8
 
-				ray[3] and *(rp + 3) do the same thing
+					float ray[5];
+					float *rp = &ray;
+					Then:
+						ray[3] = rp[3] = *(ray + 3) = *(rp + 3) = 3[rp]
