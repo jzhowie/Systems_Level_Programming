@@ -119,3 +119,10 @@ Memory Addresses
 					float *rp = &ray;
 					Then:
 						ray[3] = rp[3] = *(ray + 3) = *(rp + 3) = 3[rp]
+C functions
+	Pass by value
+	When a function is called, arguments are copied to new variables
+	Pointers can be passed as arguments
+	When you pass an array as an argument, it is treated as a memory address, not an array
+		void arr_func(int arr[]);
+		void point_func(int *arr); // preferable because passing an array would be treated as a pointer
