@@ -126,3 +126,27 @@ C functions
 	When you pass an array as an argument, it is treated as a memory address, not an array
 		void arr_func(int arr[]);
 		void point_func(int *arr); // preferable because passing an array would be treated as a pointer
+
+Strings
+	Character array
+	The last entry in the character array is NULL (0, or \0)
+		['h', 'e', 'l', 'l', 'o', 0]
+	Creating a string literal makes a char array long enough to store the string + the terminating NULL
+	String literals are immutable
+	If a string literal is repeated in code, the original array is used
+		80 "hello" strings will ALL point to one "hello"
+	Four ways to declare strings
+		char s[256]; Only declares a mutable array (no characters + NULL saved)
+		char s[256] = "Imagine"; Creates string literal + copies literal + NULL into array (in this case it would be the first 8 bytes)
+			You can go "out of bounds" in the array with a large enough string
+		char s[] = "Tuesday";
+			Creates string literal + creates 8 byte array (string length + NULL) + copies into array
+		char *s = "Mankind";
+			Creates string literal + s points to string... and that is it (do not do this)
+		char s[10] = "Yankees";
+		s = "Mets"; is an error
+		s[0] = 'M'; is ok
+
+		char *s = "AL East Champions";
+		s = "The Best"; is ok
+		s[0] = 'M'; is not
