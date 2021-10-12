@@ -7,8 +7,9 @@ Coding in C (woohoo)
 ## Intro to Make
 04_make  
 ## Intro to Memory
-### Pointers, Arrays, Strings
+**Pointers**  
 05_pointers  
 06_switcheroo  
+**Arrays**  
 07_funky  
 08_string  
