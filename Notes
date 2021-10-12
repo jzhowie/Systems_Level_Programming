@@ -1,8 +1,9 @@
 Variables & Control Structures
 	0 is false, everything else is true
-	Delclaring a variable means requesting bits of memory from the system
+	Declaring a variable means requesting memory from the system
 	Initialize variables outside of a for loop
-		if (x = 0) x is assigned 0, assignment operator returns 0, the if statement will always fail
+		if (x = 0)
+			x is assigned 0, assignment operator returns 0, the if statement will always fail
 	Declare functions before they are used Ex: double dylan(int jack);
 		Or you write it on top
 
@@ -119,7 +120,8 @@ Memory Addresses
 					float *rp = &ray;
 					Then:
 						ray[3] = rp[3] = *(ray + 3) = *(rp + 3) = 3[rp]
-						
+
+
 C functions
 	Pass by value
 	When a function is called, arguments are copied to new variables
@@ -168,7 +170,7 @@ Structs
 			struct foo becomes a valid type so you can declare variables with that type
 			foo is not a variable name
 		Assignment copies variables into struct
-			Could be potentially heavy on memory
+			Could be potentially memory-heavy
 		Try to keep structs outside functions (mainly .h files)
 	You can make a pointer to a struct
 		Declaration:
@@ -176,3 +178,9 @@ Structs
 			. happens before *
 			(*p).a != *p.a
 			Also p->x is syntactic shorthand for (*p).x
+	The value of a struct != The address of a struct (unlike an array variable)
+
+Stack vs. Heap
+	Stack stores all normally declared variables
+	Functions are pushed onto the stack in the order they are called
+	When a function is popped off the stack and any memory associated is released
