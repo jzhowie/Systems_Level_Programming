@@ -1,11 +1,7 @@
 Variables & Control Structures
 	0 is false, everything else is true
 	Declaring a variable means requesting memory from the system
-	Initialize variables outside of a for loop
-		if (x = 0)
-			x is assigned 0, assignment operator returns 0, the if statement will always fail
 	Declare functions before they are used Ex: double dylan(int jack);
-		Or you write it on top
 
 Compiling
 	Preprocessor
@@ -180,7 +176,23 @@ Structs
 			Also p->x is syntactic shorthand for (*p).x
 	The value of a struct != The address of a struct (unlike an array variable)
 
-Stack vs. Heap
+Stack memory
 	Stack stores all normally declared variables
 	Functions are pushed onto the stack in the order they are called
 	When a function is popped off the stack and any memory associated is released
+Heap memory
+	Heap memory stores dynamically allocated memory
+	Data remains in the heap until it is manually released or the program ends
+	malloc (size_t x)
+	Allocates x bytes of heap memory
+		Returns the address at the beginning of the allocation (void pointer)
+	free (void* p)
+		Releases dynamically allocated memory
+		P must point to the beginning of a dynamically allocated block of memory
+		*Every* call to malloc/calloc should have a corresponding call to free
+	calloc(size_t n, size_t x)
+		Allocates n * x bytes of memory and ensures every bit is 0
+	realloc(void *p, size_t x)
+		Changes the amount of memory allocated for a block to x bytes
+		P must point to the beginning of a block
+		Returns a pointer to the beginning of the block (could move entire thing), if x is smaller than the original size, the extra bytes are released
