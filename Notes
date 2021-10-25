@@ -26,25 +26,24 @@ Compiling
 	Linker
 		Combines binary files into an executable
 		Automatically searches for standard library source code
-		If multiple definitions for identifies are found, the linker will fail
-		Exactly one definition for main
-		Gcc compiles each file then links then together
+		If multiple definitions for identifiers are found, the linker will fail
+		Only one main function
+		Gcc compiles each file then links them together
 			Giving gcc .o files will skip the compilation step
 	Make
 		Compiling tool
 		make will look for a file makefile
 			Targets: Things to make (executables)
 			Dependencies: Files/other targets needed to make a target
-			Rules: How to create the target
+			Rules: Command to create target
 		Make will always run the first target
-		Make recursively checks dependencies (depth-first)
-		Checks modify timestamps and only runs rules if target is older than dependencies
+		Make recursively checks dependencies
 		Syntax:
 			target: dependency0 dependency1 ...
 			TAB rule
 
 			Other make targets: run, clean, <target file>
-			./make <run, clean, file>
+			make <run, clean, file>
 
 Memory
 	Binary: A 0 or 1 is a bit, 8 bits = 1 byte
@@ -87,22 +86,19 @@ Memory Addresses
 			Can add or subtract
 			Scales by the size of type (char increments by 1, int increments by 4)
 			*cp++ != (*cp)++
-			Pointers can store memory addresses out of the physical limit, but won't be able to dereference (Seg Fault)
+			Pointers can store memory addresses outside the physical limit, but won't be able to dereference (Seg Fault)
 		Arrays
 			Block of memory that holds multiple pieces of the same data type
 			C arrays have no length attribute
-			Size of an array is set at declaration (cannot be dynamic, equal to a variable or function)
+			Size of an array is set at declaration (cannot be dynamic)
 			No boundary checking
 			Declaration:
 				float ray[5];
 				ray[2] = 8.22;
-
 				Requests enough memory for 5 floats
 
 			Array Variables
-				Pointers to the allocated array block
-				Immutable
-				Ray will point to the beginning of the array
+				Immutable pointer to the beginning of the allocated array block
 				sizeof(variable) can give the size of a variable
 				You can keep track of array size like this:
 					int ARR_SIZE = 10;
@@ -127,8 +123,7 @@ C functions
 		void point_func(int *arr); // preferable because passing an array would be treated as a pointer
 
 Strings
-	Character array
-	The last entry in the character array is NULL (0, or \0)
+	Character array where the last entry in the array is NULL
 		['h', 'e', 'l', 'l', 'o', 0]
 	Creating a string literal makes a char array long enough to store the string + the terminating NULL
 	String literals are immutable
@@ -179,7 +174,7 @@ Structs
 Stack memory
 	Stack stores all normally declared variables
 	Functions are pushed onto the stack in the order they are called
-	When a function is popped off the stack and any memory associated is released
+	When a function is popped off the stack, any memory associated is released
 Heap memory
 	Heap memory stores dynamically allocated memory
 	Data remains in the heap until it is manually released or the program ends
@@ -196,3 +191,30 @@ Heap memory
 		Changes the amount of memory allocated for a block to x bytes
 		P must point to the beginning of a block
 		Returns a pointer to the beginning of the block (could move entire thing), if x is smaller than the original size, the extra bytes are released
+2D arrays
+	int b[2][4]; -> 2 * 4 * 4 bytes = 32 bytes
+	int **bp = b; -> Pointer scaling is inaccurate
+	int (*bp1)[4] = b; -> Pointer scaling is accurate
+	void foo(int a[2][4]);
+	void foo(int (*a)[4]);
+	void foo(int a[][4]);
+	Alternatively you can work in heap memory
+	int **bp = malloc(2 * sizeof(int *));
+	bp[i] = malloc(4 * sizeof(int));
+Bits
+	You can declare ints as a binary, octal, or hexadecimal
+	0b1101 == 015 == 0xD == 13
+Bitwise Operators
+	Evaluated on every bit of a value
+	~x
+		Negation
+		"Flip" every bit of x
+	a | b
+		Bitwise or																									0011			0011			1101
+		Perform logical or for each pair of bits in (a, b)				|	1001		&	1001		^	1011
+	a & b																													1011			0001			0110
+		Bitwise and
+		Bitwise or but and
+	a ^ b
+		Bitwise xor
+		Bitwise or but xor
