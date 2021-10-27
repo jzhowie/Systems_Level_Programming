@@ -17,7 +17,7 @@ Coding in C (woohoo)
 
 **Structs**  
 09_construction  
-10_list
-project_00
+10_list  
+project_00  
 ## File Manipulation
 11_randfile  
