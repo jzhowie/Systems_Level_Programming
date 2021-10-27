@@ -15,7 +15,7 @@ Coding in C (woohoo)
 07_funky  
 08_string  
 
-**Structs**
+**Structs**  
 09_construction  
 10_list
 project_00
