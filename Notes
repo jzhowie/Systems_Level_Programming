@@ -209,12 +209,26 @@ Bitwise Operators
 	~x
 		Negation
 		"Flip" every bit of x
-	a | b
-		Bitwise or																									0011			0011			1101
-		Perform logical or for each pair of bits in (a, b)				|	1001		&	1001		^	1011
-	a & b																													1011			0001			0110
+	a | b			0011 | 1001 == 1011
+		Bitwise or
+		Perform logical or for each pair of bits in (a, b)
+	a & b			0011 & 1001 == 0001
 		Bitwise and
 		Bitwise or but and
-	a ^ b
+	a ^ b			1101 ^ 1011 == 0110
 		Bitwise xor
 		Bitwise or but xor
+"Everything is a file"
+	You can use common tools to operate on different things
+	Knowing how to interact with normal files can help you work with... less file-like things
+File permissions
+	Read, write, execute
+	Perms can be represented in binary or octal
+	3 permission "areas" - user, group, others
+	Membership is mutually exclusive
+	The creator of the file is the default setting for the user and group of a file
+	chmod <permissions> file
+		Owner (or root) of a file can change permissions
+		File ownership and group can be changed with chown and chgrp
+File table
+	List of all files being used by a program while it is running
