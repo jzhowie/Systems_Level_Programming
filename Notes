@@ -232,3 +232,16 @@ File permissions
 		File ownership and group can be changed with chown and chgrp
 File table
 	List of all files being used by a program while it is running
+	File table has limited space (power of 2)
+		Find it with getdtablesize()
+	Every file in table gets integer index (file descriptor)
+	3 files are always open in the table
+		0 is stdin
+		1 is stdout
+		2 is stderr
+	open - <fnctl.h>
+		Adds file to table and returns descriptor
+		-1 is returned when function fails
+		open(path, flags, mode)
+			Path is path
+			Flags determine what you do with the file
