@@ -14,3 +14,10 @@ Coding in C (woohoo)
 **Arrays**  
 07_funky  
 08_string  
+
+**Structs**  
+09_construction  
+10_list  
+project_00  
+## File Manipulation
+11_randfile  
