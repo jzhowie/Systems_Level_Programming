@@ -245,3 +245,10 @@ File table
 		open(path, flags, mode)
 			Path is path
 			Flags determine what you do with the file
+	umask - <sys/stat.h>
+		Certain permissions are auto-disabled on file creation
+		Umask overrides this
+			Default mask is 0002
+			new_permissions = ~mask & mode
+	read - <unistd.h> & write - <unistd.h>
+	Both methods require a file, pointer to start of data, how much data is being used
