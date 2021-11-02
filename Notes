@@ -250,5 +250,17 @@ File table
 		Umask overrides this
 			Default mask is 0002
 			new_permissions = ~mask & mode
-	read - <unistd.h> & write - <unistd.h>
+	read & write - <unistd.h>
 	Both methods require a file, pointer to start of data, how much data is being used
+	lseek - <unistd.h>
+		Moves the "bookmark"
+		Needs file, offset (how many bytes moved), whence (SEEK_SET, SEEK_CUR, SEEK_END)
+	stat - <sys/stat.h>
+		Get metadata
+		Needs path to file, pointer to a struct stat
+		st_size, st_uid, st_gid, st_mode, st_atime, st_mtime
+		ctime(time), returns time as a string
+	Directories - <dirent.h>
+		Dictate file system
+		opendir() needs DIR *d
+		readdir() returns struct dirent
