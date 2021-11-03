@@ -264,3 +264,21 @@ File table
 		Dictate file system
 		opendir() needs DIR *d
 		readdir() returns struct dirent
+Input
+	int main(int argc, char *argv[])
+		argc - number of arguments
+		argv - array of arguments as strings
+	sscanf - <stdio.h>
+		Read data from a string using a format string to determine types
+		"A reverse printf"
+	 	sscanf(char * s, char * format, void * p1 ...)
+	stdin
+		OS determines behavior of standard input stream
+			Captures data input from keyboard as characters
+			Buffered file stream, data remains inside stdin until it is read
+			Enter sends a newline character and triggers program to read from stdin
+			read(STDIN_FILENO, buffer, sizeof(buffer));
+			fgets - <stdio.h>
+				Read in data from a file stream and store it in a string
+				fgets(char * s, int n, FILE * f)
+				stdin is a file stream variable
