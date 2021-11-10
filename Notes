@@ -1,13 +1,12 @@
 Variables & Control Structures
 	0 is false, everything else is true
 	Declaring a variable means requesting memory from the system
-	Declare functions before they are used Ex: double dylan(int jack);
+	Declare functions before they are used: double dylan(int jack);
 
 Compiling
 	Preprocessor
 		Text replacement program
 		Preprocessor commands start with a #
-			No ";" at the end
 			#include - adds entire text of included file
 			#define <arg1> <arg2> - replaces every instance of arg1 with arg2
 				You can also define function-like stuff:
@@ -254,14 +253,13 @@ File table
 	Both methods require a file, pointer to start of data, how much data is being used
 	lseek - <unistd.h>
 		Moves the "bookmark"
-		Needs file, offset (how many bytes moved), whence (SEEK_SET, SEEK_CUR, SEEK_END)
+		Needs file, offset, whence (SEEK_SET, SEEK_CUR, SEEK_END)
 	stat - <sys/stat.h>
 		Get metadata
 		Needs path to file, pointer to a struct stat
 		st_size, st_uid, st_gid, st_mode, st_atime, st_mtime
 		ctime(time), returns time as a string
 	Directories - <dirent.h>
-		Dictate file system
 		opendir() needs DIR *d
 		readdir() returns struct dirent
 Input
@@ -282,3 +280,22 @@ Input
 				Read in data from a file stream and store it in a string
 				fgets(char * s, int n, FILE * f)
 				stdin is a file stream variable
+Processes
+	Every running program is a processor
+	Program can spawn subprocesses
+	A processor can handle 1 process per cycle per core
+	"Multitasking" appears to happen because the processor switches between all the active processes quickly
+	On *nix style machines, processes are also files in /proc directory
+	pid
+		Every process has a pid
+		pid 1 is the init process
+		getpid() - <unistd.h> - return current process' pid
+		getppid() - <unistd.h> - return current process parent's pid
+	Signals
+		Sends an integer to a process
+		kill -signal pid
+		killall -signal process_name
+		kill(pid, signal) - literally the kill command
+		sighandler - intercepts signals
+			Cannot catch SIGKILL or SIGSTOP
+		static void sighandler(int signo)
