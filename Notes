@@ -299,3 +299,32 @@ Processes
 		sighandler - intercepts signals
 			Cannot catch SIGKILL or SIGSTOP
 		static void sighandler(int signo)
+fork() - <unistd.h>
+	Creates separate process based on current one
+	Everything is copied (except pid)
+	Returns 0 to child and pid or -1 to parent
+wait - <sys/wait.h>
+	Stops a parent process from running until any child has exited
+	Return pid of child that exited or -1, reaps info about child process
+	wait(status)
+		status stores information about how process exited
+		MACRO(status)
+			WIFEEXITED - child exits normally
+			WEXITSTATUS - return value
+			WIFSIGNALED - child exits because of signal
+			WTERMSIG - signal number intercepted by child
+waitpid - <sys/wait.h>
+	waitpid(pid, status, options)
+Redirection
+	Change usual i/o behavior of program
+	> Takes output (stdout) of command and sends it to file (overwrites)
+	>> Redirection but appending
+	< Takes file and treats it like stdin
+dup - <unistd.h>
+	dup(fd)
+	Duplicated entry in file table
+	Returns new file descriptor
+dup2 - <unistd.h>
+	dup2(fd1, fd2)
+	Redirects fd2 to fd1
+	Any use of fd2 will now act on the file for fd1

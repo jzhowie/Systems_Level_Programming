@@ -19,5 +19,13 @@ Coding in C (woohoo)
 09_construction  
 10_list  
 project_00  
-## File Manipulation
+## Intro to Files
 11_randfile  
+## Input / Output
+12_dirinfo  
+13_structrw  
+## Processes
+14_signal  
+15_parse-args  
+16_forkin  
+project_01
