@@ -328,3 +328,4 @@ dup2 - <unistd.h>
 	dup2(fd1, fd2)
 	Redirects fd2 to fd1
 	Any use of fd2 will now act on the file for fd1
+	Basically use dup to save STDOUT
