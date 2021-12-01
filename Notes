@@ -1,11 +1,11 @@
 Variables & Control Structures
 	0 is false, everything else is true
 	Declaring a variable means requesting memory from the system
-	Declare functions before they are used: double dylan(int jack);
+	Declare functions at the top of a .c or in a .h
 
 Compiling
 	Preprocessor
-		Text replacement program
+		Text replacement
 		Preprocessor commands start with a #
 			#include - adds entire text of included file
 			#define <arg1> <arg2> - replaces every instance of arg1 with arg2
@@ -85,7 +85,7 @@ Memory Addresses
 			Can add or subtract
 			Scales by the size of type (char increments by 1, int increments by 4)
 			*cp++ != (*cp)++
-			Pointers can store memory addresses outside the physical limit, but won't be able to dereference (Seg Fault)
+			Pointers can store memory addresses outside the physical limit, but won't be able to dereference
 		Arrays
 			Block of memory that holds multiple pieces of the same data type
 			C arrays have no length attribute
@@ -105,7 +105,7 @@ Memory Addresses
 				Normal pointers can also be assigned to array pointers (it will do normal pointer things)
 
 				If you did float *rp = ray;
-				sizeof(rp) would return 20, sizeof(ray) would return 8
+				sizeof(rp) would return 8, sizeof(ray) would return 20
 
 					float ray[5];
 					float *rp = &ray;
@@ -117,7 +117,7 @@ C functions
 	Pass by value
 	When a function is called, arguments are copied to new variables
 	Pointers can be passed as arguments
-	When you pass an array as an argument, it is treated as a memory address, not an array
+	When you pass an array as an argument, it is treated as a memory address
 		void arr_func(int arr[]);
 		void point_func(int *arr); // preferable because passing an array would be treated as a pointer
 
@@ -126,16 +126,16 @@ Strings
 		['h', 'e', 'l', 'l', 'o', 0]
 	Creating a string literal makes a char array long enough to store the string + the terminating NULL
 	String literals are immutable
-	If a string literal is repeated in code, the original array is used
+	If a string literal is repeated in code, only one string literal is used
 		80 "hello" strings will ALL point to one "hello"
 	String declaration:
-		char s[256]; Only declares a mutable array (no characters or NULL saved)
+		char s[256]; Declares char array
 		char s[256] = "Imagine"; Creates string literal + copies literal + NULL into array (in this case it would be the first 8 bytes)
-			You can go "out of bounds" in the array with a large enough string
+			You can go "out of bounds" with a large enough string
 		char s[] = "Tuesday";
-			Creates string literal + creates 8 byte array (string length + NULL) + copies into array
+			Creates string literal + creates string length + 1 long array + copies into array
 		char *s = "Mankind";
-			Creates string literal + s points to string... and that is it (do not do this)
+			Creates string literal + s points to string (least mutable)
 
 		char s[10] = "Yankees";
 		s = "Mets"; is an error
@@ -217,9 +217,6 @@ Bitwise Operators
 	a ^ b			1101 ^ 1011 == 0110
 		Bitwise xor
 		Bitwise or but xor
-"Everything is a file"
-	You can use common tools to operate on different things
-	Knowing how to interact with normal files can help you work with... less file-like things
 File permissions
 	Read, write, execute
 	Perms can be represented in binary or octal
@@ -250,7 +247,7 @@ File table
 			Default mask is 0002
 			new_permissions = ~mask & mode
 	read & write - <unistd.h>
-	Both methods require a file, pointer to start of data, how much data is being used
+	Both methods require a file descriptor, pointer to start of data, how much data is being used
 	lseek - <unistd.h>
 		Moves the "bookmark"
 		Needs file, offset, whence (SEEK_SET, SEEK_CUR, SEEK_END)
@@ -281,7 +278,7 @@ Input
 				fgets(char * s, int n, FILE * f)
 				stdin is a file stream variable
 Processes
-	Every running program is a processor
+	Every running program is a process
 	Program can spawn subprocesses
 	A processor can handle 1 process per cycle per core
 	"Multitasking" appears to happen because the processor switches between all the active processes quickly
@@ -329,3 +326,41 @@ dup2 - <unistd.h>
 	Redirects fd2 to fd1
 	Any use of fd2 will now act on the file for fd1
 	Basically use dup to save STDOUT
+
+Inter-Process Communication
+	Shared Memory
+	Semaphores
+	Message Queues
+	Two standards:
+		Portable Operating System Interface (POSIX)
+		System V
+		Both provide same features through different function calls
+		Both cover more than IPC
+
+	Shared Memory - <sys/ipc.h>, <sys/shm.h>, <sys/types.h>
+		Segment of heap-like memory that can be accessed by multiple processes
+		Accessed with a key that is known by any process that needs it
+		Does NOT get released when program exits
+		Operations:
+			Create the segment (once) - shmget
+			Access the segment (once per process) - shmget
+			Attach the segment to a variable (once per process) - shmat
+			Detach the segment from a variable (once per process) - shmdt
+			Remove the segment (once) - shmctl
+	Semaphores - 
+		Created by Edsger Dijkstra
+		Controls access to a shared resource
+		Used as a counter representing how many processes can access a resource at a given time
+		Most semaphore operations are atomic, meaning they will not be split up into multiple processor instructions
+		Operations:
+			Maintenance:
+				Create a semaphore
+				Set an initial value
+				Remove a semaphore
+			Traditional:
+				Up(S) | V(S) - atomic
+					Release the semaphore to signal you are done
+				Down(S) | P(S) - atomic
+					Attempt to take the semaphore
+					Waits for semaphore to be available if it is 0
+
