@@ -363,4 +363,30 @@ Inter-Process Communication
 				Down(S) | P(S) - atomic
 					Attempt to take the semaphore
 					Waits for semaphore to be available if it is 0
+Pipe
+	A conduit in memory between 2 separate process on the same computer
+	Have a read end and a write end
+	Named pipe - works like a file
+		Also known as FIFOs
+		Have identifying names
+		Unidirectional like unnamed pipes
+	Unnamed pipe - no external identifier
+	Pipes will block on open until there are two processes attached
+	pipe - <unistd.h>
+		Creates unnamed pipe, returns 0 or -1
+	pipe(descriptors)
+		Array of two ints that contains the descriptors
 
+Three-way Handshake
+	Two processes (or computers) communicating via pipes
+	They will only know that they can read data off of the other
+	They don't know if their data is going through
+	Procedure in pseudocode:
+		1. P0 sends message to P1 (SYN)
+		2. P1 sends back a message based on P0's message (ACK)
+		3. P0 sends a message based on P1's response (SYN_ACK)
+	Pipe 3-way Handshake
+		0. S creates a well-known pipe, waits for connection
+		1. C creates a secret pipe, send that name to S
+		2. S sends a message on the secret pipe
+		3. C sends acknowledgement message to S
