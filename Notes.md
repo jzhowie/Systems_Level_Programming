@@ -347,7 +347,7 @@ Inter-Process Communication
 			Attach the segment to a variable (once per process) - shmat
 			Detach the segment from a variable (once per process) - shmdt
 			Remove the segment (once) - shmctl
-	Semaphores - 
+	Semaphores -
 		Created by Edsger Dijkstra
 		Controls access to a shared resource
 		Used as a counter representing how many processes can access a resource at a given time
@@ -363,6 +363,25 @@ Inter-Process Communication
 				Down(S) | P(S) - atomic
 					Attempt to take the semaphore
 					Waits for semaphore to be available if it is 0
+		Creating a single semaphore and initializing its value to 1:
+			int semd = semget(KEY, 1, IPC_CREAT | IPC_EXCL | 0644);
+			union semun us;
+			us.val = 1;
+			r = semctl(semd, 0, SETVAL, us);
+		Removing a semaphore: semctl(semd, IPC_RMID, 0);
+		Getting a a semaphore & upping and downing it.
+			semd = semget(KEY, 1, 0); //get access
+			struct sembuf sb;
+			sb.sem_num = 0;
+			sb.sem_flg = SEM_UNDO;
+			sb.sem_op = -1; //setting the operation to down
+
+			semop(semd, &sb, 1); //perform the operation
+			printf("got the semaphore!\n");
+			sleep(10); //simulate doing something.
+
+			sb.sem_op = 1; //set the operation to up
+			semop(semd, &sb, 1); //perform the operation
 Pipe
 	A conduit in memory between 2 separate process on the same computer
 	Have a read end and a write end
@@ -390,3 +409,84 @@ Three-way Handshake
 		1. C creates a secret pipe, send that name to S
 		2. S sends a message on the secret pipe
 		3. C sends acknowledgement message to S
+	3-way handshake
+		0. Server creates WKP, waits for connection
+		1. Client creates secret pipe
+		2. Client sends message to server
+		3. Server removes WKP
+		4. Server sends message to client
+		5. Client receives response, removes secret pipe
+		6. Client sends final verification message
+
+Persistent Single Server
+	Server handles one client at a time
+	Server waits for next client when done
+	Handshake, data, repeat
+
+Multiple Clients
+	0. S creates WKP, block
+	1. C creates PP
+	2. C opens WKP, sends PP to S
+	3. C blocks on PP
+	4. S reads PP
+	5. S forks
+	6. S removes and closes WKP
+	7. S reinitializes
+	8. SS sends message to client
+	9. C gets message and removes PP
+	10. C responds
+	11. Normal R/W cycle
+
+Networking
+	OSI (Open Systems Interconnections)
+	TCP/IP
+		1. Application
+		2. Support
+		3. Internet
+			Transmission of data between separate networks
+			Addressing and routing
+			Routers connect different local networks
+				Routers break IPv4 packets into fragments
+				Upon receiving a packet it can:
+					Send it to the local network
+					Pass the packet to another router
+					Routers have address tables that identify all connected networks
+				IPv4 packet format: header source destination data
+					header 12B: metadata
+						format: type size fragmentinfo ttl protocol headerchecksum
+						type - IPv4 or v6
+						size - size of packet
+						fragmentinfo - Identifies packet number
+						ttl - number of devices packet can hit
+					source and destination 4B each: IP address
+					data: MTU is 65,536 bytes
+			Internet Protocol covers standards for addressing and packet format
+		4. Link
+			Point-to-point transmission between devices on the same network
+			Combines physically connecting computers with basic addressing and transmission protocols
+			Physical: How do we transmit bits between two computers (electrons, photons, radio waves)
+			Thicknet
+				A single coaxial cable, "vampire taps" cut into cable and connect to a computer
+			Thinnet
+				Single coaxial cable, T-connectors connect computers
+			Token ring
+				Ring of computers
+				One computer has the token and can transmit data
+				No signal degradation, no signal collision
+			Ethernet
+				Multiple computers connected to a hub or switch
+				Hub - Broadcasts data to all computers
+				Switch - Sends data to specific computer
+			In order for data to be sent between computers:
+				Each computer needs a unique address (MAC address)
+				Media Access Control Address
+					6-byte hex address
+					MAC addresses only need to be unique on the same local network
+				Data needs to be sent in a standardized format
+				Frame
+					Format: prefix dest source type data checksum
+					prefix 8B: 10101010 x7 + 10101011
+					dest & source 6B each: MAC addresses
+					type 2B
+					data: MTU (Maximum Transmission Unit) of 1500B
+					checksum 4B: data integrity
