@@ -459,9 +459,23 @@ Networking
 						size - size of packet
 						fragmentinfo - Identifies packet number
 						ttl - number of devices packet can hit
+            protocol - TCP/UDP
+            checksum: only for the header
 					source and destination 4B each: IP address
 					data: MTU is 65,536 bytes
 			Internet Protocol covers standards for addressing and packet format
+
+      IP addresses
+        Every device connected to the internet has an IP address
+        Organizations own blocks of IP addresses
+
+      IPv6 vs. IPv4
+        Address space 2^128 vs. 2^32
+        IPv6 headers have less info, no checksum or fragment info
+        IPv6 can allot for an MTU of 2^32 (4 GB) (jumbograms)
+        IPv6 emphasizes the link layer (checksums and reconstituting data)
+        Does not fragment, relies on other devices
+
 		4. Link
 			Point-to-point transmission between devices on the same network
 			Combines physically connecting computers with basic addressing and transmission protocols
