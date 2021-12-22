@@ -314,8 +314,8 @@ waitpid - <sys/wait.h>
 	waitpid(pid, status, options)
 Redirection
 	Change usual i/o behavior of program
-	> Takes output (stdout) of command and sends it to file (overwrites)
-	>> Redirection but appending
+	\> Takes output (stdout) of command and sends it to file (overwrites)
+	\>> Redirection but appending
 	< Takes file and treats it like stdin
 dup - <unistd.h>
 	dup(fd)
