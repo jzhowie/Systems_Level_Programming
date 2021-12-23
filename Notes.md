@@ -1,23 +1,24 @@
-Variables & Control Structures
-	0 is false, everything else is true
-	Declaring a variable means requesting memory from the system
-	Declare functions at the top of a .c or in a .h
+# Notes
+- Variables & Control Structures
+	- 0 is false, everything else is true
+	- Declaring a variable means requesting memory from the system
+	- Declare functions at the top of a .c or in a .h
 
-Compiling
-	Preprocessor
-		Text replacement
-		Preprocessor commands start with a #
-			#include - adds entire text of included file
-			#define <arg1> <arg2> - replaces every instance of arg1 with arg2
-				You can also define function-like stuff:
-				#define MAX(a, b) a > b ? a : b
-			#ifndef <IDENTIFIER> ... #endif - If identifier is not defined for preprocessor, read up to #endif, else don't.
-				Example:
-				#ifndef PI
+- Compiling
+	- Preprocessor
+		- Text replacement
+		- Preprocessor commands start with a #
+			- #include - adds entire text of included file
+			- #define <arg1> <arg2> - replaces every instance of arg1 with arg2
+				- You can also define function-like stuff:
+				- #define MAX(a, b) a > b ? a : b
+			- #ifndef <IDENTIFIER> ... #endif - If identifier is not defined for preprocessor, read up to #endif, else don't.
+				- Example:
+				` #ifndef PI
 				#define PI 3.14
-				#endif
+				#endif `
 	Compiler
-		Code -> binary code
+		Code &#8594 binary code
 		Doesn't create an executable
 		Only one C file at a time
 		gcc -c runs preprocessor and compiler
