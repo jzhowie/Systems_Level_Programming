@@ -442,7 +442,22 @@ Networking
 	OSI (Open Systems Interconnections)
 	TCP/IP
 		1. Application
-		2. Support
+		2. Transport
+			Computer to computer connections
+			Socket facilitates data transfer
+			Network Ports
+				Sub-address that allows computers sharing an IP address to have multiple open network connections
+				65536 ports, ports < 1024 are well-known
+			TCP (Transmission Control Protocol)
+				Reliable connection, guarantees delivery of data
+				Stream, FIFO
+				3-way handshake
+			UDP (User Datagram Protocol)
+				No explicit connection, doesn't guarantee delivery
+				Sent as discrete datagrams with a set size
+				Datagrams could drop or arrive out of order
+				UDP only has to be initiated on one side and is therefore faster
+				Can still have error checking
 		3. Internet
 			Transmission of data between separate networks
 			Addressing and routing
