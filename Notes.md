@@ -8,22 +8,22 @@
 	- Preprocessor
 		- Text replacement
 		- Preprocessor commands start with a #
-			- #include - adds entire text of included file
-			- #define <arg1> <arg2> - replaces every instance of arg1 with arg2
+			- `#include` - adds entire text of included file
+			- `#define <arg1> <arg2>` - replaces every instance of arg1 with arg2
 				- You can also define function-like stuff:
-				- #define MAX(a, b) a > b ? a : b
-			- #ifndef <IDENTIFIER> ... #endif - If identifier is not defined for preprocessor, read up to #endif, else don't.
+				- `#define MAX(a, b) a > b ? a : b`
+			- `#ifndef <IDENTIFIER> ... #endif` - If identifier is not defined for preprocessor, read up to #endif, else don't.
 				- Example:
 				` #ifndef PI
 				#define PI 3.14
 				#endif `
-	Compiler
-		Code → binary code
-		Doesn't create an executable
-		Only one C file at a time
-		gcc -c runs preprocessor and compiler
-		gcc -E runs through preprocessor
-	Linker
+	- Compiler
+		- Code → binary code
+		- Doesn't create an executable
+		- Only one C file at a time
+		- gcc -c runs preprocessor and compiler
+		- gcc -E runs through preprocessor
+	- Linker
 		Combines binary files into an executable
 		Automatically searches for standard library source code
 		If multiple definitions for identifiers are found, the linker will fail
