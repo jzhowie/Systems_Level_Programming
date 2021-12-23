@@ -24,77 +24,76 @@
 		- gcc -c runs preprocessor and compiler
 		- gcc -E runs through preprocessor
 	- Linker
-		Combines binary files into an executable
-		Automatically searches for standard library source code
-		If multiple definitions for identifiers are found, the linker will fail
-		Only one main function
-		Gcc compiles each file then links them together
-			Giving gcc .o files will skip the compilation step
-	Make
-		Compiling tool
-		make will look for a file makefile
-			Targets: Things to make (executables)
-			Dependencies: Files/other targets needed to make a target
-			Rules: Command to create target
-		Make will always run the first target
-		Make recursively checks dependencies
-		Syntax:
-			target: dependency0 dependency1 ...
-			TAB rule
+		- Combines binary files into an executable
+		- Automatically searches for standard library source code
+		- If multiple definitions for identifiers are found, the linker will fail
+		- Only one main function
+		- Gcc compiles each file then links them together
+			- Giving gcc .o files will skip the compilation step
+	- Make
+		- Compiling tool
+		- make will look for a file makefile
+			- Targets: Things to make (executables)
+			- Dependencies: Files/other targets needed to make a target
+			- Rules: Command to create target
+		- Make will always run the first target
+		- Make recursively checks dependencies
+		- Syntax:
+			`target: dependency0 dependency1 ...
+			TAB rule`
 
-			Other make targets: run, clean, <target file>
-			make <run, clean, file>
+			- Other make targets: run, clean, <target file>
+			`make <run, clean, file>`
 
-Memory
-	Binary: A 0 or 1 is a bit, 8 bits = 1 byte
-	Volatile, requires power to store data
-	Opening a file: Computer copies file from storage into memory
-		Saving does the reverse
-		Running programs use memory (declaring variables)
+- Memory
+	- Binary: A 0 or 1 is a bit, 8 bits = 1 byte
+	- Volatile, requires power to store data
+	- Opening a file: Computer copies file from storage into memory
+		- Saving does the reverse
+		- Running programs use memory (declaring variables)
 
-	Endianness
-		Significance of bytes
-		261 as an int would be stored as 00000000 00000000 00000001 00000101
-			Big endian - most significant byte is at the start
-				Print as a short would not include the last two bytes
-			Little endian is the opposite (00000101 00000001 00000000 00000000)
-				Print would include the full value
+	- Endianness
+		- Significance of bytes
+		- 261 as an int would be stored as 00000000 00000000 00000001 00000101
+			- Big endian - most significant byte is at the start
+				- Print as a short would not include the last two bytes
+			- Little endian is the opposite (00000101 00000001 00000000 00000000)
+				- Print would include the full value
 
-Memory Addresses
-	Identifier - variable name
-	Value - variable data
-	Address - location of data in memory
-		Addressed from first byte up
-		Potential memory addresses is a processor limitation
-			A 32-bit processor can only process no more than 32 bits at once
-		OS defines address space
-		You can get the address of any variable using the address of operator: &
-		%p prints out memory address in hexadecimal format
-			You can also see it as an unsigned long
-		%u(nsigned), %d(ecimal), %o(ctal), (he)%x(adecimal)
-			h will print 2 bytes
-			hh will print 1 byte
+- Memory Addresses
+	- Identifier - variable name
+	- Value - variable data
+	- Address - location of data in memory
+		- Addressed from first byte up
+		- Potential memory addresses is a processor limitation
+			- A 32-bit processor can only process no more than 32 bits at once
+		- OS defines address space
+		- You can get the address of any variable using the address of operator: &
+		- %p prints out memory address in hexadecimal format
+			- You can also see it as an unsigned long
+		`%u(nsigned), %d(ecimal), %o(ctal), (he)%x(adecimal)`
+			- h will print 2 bytes
+			- hh will print 1 byte
 
-	Pointers
-		Pointers are variables that store memory addresses
-			Unsigned
-			8 bytes long on 64-bit systems
-			Declaration:
-				int *p = &x;
-			In Java NullPointerExceptions come from when object pointers point to memory address 0
-		Pointer Arithmetic
-			Can add or subtract
-			Scales by the size of type (char increments by 1, int increments by 4)
-			*cp++ != (*cp)++
-			Pointers can store memory addresses outside the physical limit, but won't be able to dereference
-		Arrays
-			Block of memory that holds multiple pieces of the same data type
-			C arrays have no length attribute
-			Size of an array is set at declaration (cannot be dynamic)
-			No boundary checking
-			Declaration:
-				float ray[5];
-				ray[2] = 8.22;
+	- Pointers
+		- Pointers are variables that store memory addresses
+			- Unsigned
+			- 8 bytes long on 64-bit systems
+			- Declaration:
+				`int *p = &x;`
+			- In Java NullPointerExceptions come from when object pointers point to memory address 0
+		- Pointer Arithmetic
+			- Can add or subtract
+			- Scales by the size of type (char increments by 1, int increments by 4)
+			`*cp++ != (*cp)++`
+			- Pointers can store memory addresses outside the physical limit, but won't be able to dereference
+		- Arrays
+			- Block of memory that holds multiple pieces of the same data type
+			- C arrays have no length attribute, no boundaries
+			- Size of an array is set at declaration (cannot be dynamic)
+			- Declaration:
+				`float ray[5];
+				ray[2] = 8.22;`
 				Requests enough memory for 5 floats
 
 			Array Variables
