@@ -70,8 +70,8 @@
 		- OS defines address space
 		- You can get the address of any variable using the address of operator: &
 		- %p prints out memory address in hexadecimal format
-			- You can also see it as an unsigned long
-		`%u(nsigned), %d(ecimal), %o(ctal), (he)%x(adecimal)`
+			- You can also see it as an unsigned long  
+		`%u(nsigned), %d(ecimal), %o(ctal), (he)%x(adecimal)`  
 			- h will print 2 bytes
 			- hh will print 1 byte
 
@@ -94,7 +94,7 @@
 			- Declaration:
 				`float ray[5];
 				ray[2] = 8.22;`
-				Requests enough memory for 5 floats
+			- Requests enough memory for 5 floats
 
 			Array Variables
 				Immutable pointer to the beginning of the allocated array block
@@ -107,10 +107,10 @@
 				If you did float *rp = ray;
 				sizeof(rp) would return 8, sizeof(ray) would return 20
 
-					float ray[5];
+					`float ray[5];
 					float *rp = &ray;
 					Then:
-						ray[3] = rp[3] = *(ray + 3) = *(rp + 3) = 3[rp]
+						ray[3] = rp[3] = *(ray + 3) = *(rp + 3) = 3[rp]`
 
 
 C functions
