@@ -18,7 +18,7 @@
 				#define PI 3.14
 				#endif `
 	Compiler
-		Code &#8594 binary code
+		Code → binary code
 		Doesn't create an executable
 		Only one C file at a time
 		gcc -c runs preprocessor and compiler
