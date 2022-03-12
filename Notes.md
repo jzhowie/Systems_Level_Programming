@@ -42,8 +42,7 @@
 			`target: dependency0 dependency1 ...
 			TAB rule`
 
-			- Other make targets: run, clean, <target file>
-			`make <run, clean, file>`
+			- Other make targets:	`make <run, clean, file>`
 
 - Memory
 	- Binary: A 0 or 1 is a bit, 8 bits = 1 byte
