@@ -28,4 +28,15 @@ project_00
 14_signal  
 15_parse-args  
 16_forkin  
-project_01
+project_01  
+17_semaphone
+## Servers
+**Pipes**  
+18_plumbing  
+19_names  
+**Servers**  
+20_handshake  
+21_persistent  
+22_fork  
+23_netfork  
+project_02  
